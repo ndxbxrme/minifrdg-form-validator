@@ -48,7 +48,7 @@ const MinifrdgFormValidator = (app, validators) => {
     return output;
   };
   const init = (selector) => {
-    const fprm = app.$(selector);
+    const form = app.$(selector);
     Array.from(form.elements).forEach(elem => {
       if(elem.name) {
         elem.onchange = (ev) => {
