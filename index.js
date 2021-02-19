@@ -49,7 +49,7 @@ const MinifrdgFormValidator = (app, validators) => {
   };
   const init = (selector) => {
     const fprm = app.$(selector);
-    form.elements.forEach(elem => {
+    Array.from(form.elements).forEach(elem => {
       if(elem.name) {
         elem.onchange = (ev) => {
           ev.srcElement.dirty = true;
