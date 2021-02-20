@@ -1,9 +1,11 @@
 {
   "name": "minifrdg-form-validator",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "deploy": "cp index.js minifrdg-form-validator.js && aws s3 cp minifrdg-form-validator.js s3://www.rainstormweb.com/ && rm -rf minifrdg-form-validator.js"
+  },
   "keywords": [],
   "author": "ndxbxrme",
   "license": "ISC"

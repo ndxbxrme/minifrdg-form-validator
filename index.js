@@ -13,7 +13,7 @@ const MinifrdgFormValidator = (app, validators) => {
     const errors = [];
     truth = Array.from(form.elements).reduce((truth, elem) => {
       if(elem.name) {
-        const localTruth = true;
+        let localTruth = true;
         output[elem.name] = elem.value;
         if(elem.type==='number') output[elem.value] = +elem.value;
         elem.getAttributeNames().forEach(name => {
