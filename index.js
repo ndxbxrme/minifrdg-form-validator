@@ -60,10 +60,10 @@ const MinifrdgFormValidator = (app, validators) => {
     });
     validate(selector);
   }
-  const SimpleFormCtrl = (dataRoot, dataField, formSelector, redirect, saveFn, objectDecorator, itemFilterFn) => {
+  const SimpleFormCtrl = (dataRoot, dataField, formSelector, submitName, redirect, saveFn, objectDecorator, itemFilterFn) => {
     return (app) => {
       const [item] = (dataRoot[dataField] || []).filter(itemFilterFn || (item => item.id===app.params[0]));
-      app.fns.submit = () => {
+      app.fns[submitName || 'submit'] = () => {
         try {
           const output = app.validator.validate(formSelector || 'form', true);
           if(objectDecorator) objectDecorator(output, item);
