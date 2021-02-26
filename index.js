@@ -60,6 +60,27 @@ const MinifrdgFormValidator = (app, validators) => {
     });
     validate(selector);
   }
-  app.validator = {init, validate};
+  const SimpleFormCtrl = (dataRoot, dataField, formSelector, redirect, saveFn, objectDecorator, itemFilterFn) => {
+    return (app) => {
+      const [item] = (dataRoot[dataField] || []).filter(itemFilterFn || (item => item.id===app.params[0]));
+      app.fns.submit = () => {
+        try {
+          const output = app.validator.validate(formSelector || 'form', true);
+          if(objectDecorator) objectDecorator(output, item);
+          if(item) Object.assign(item, output);
+          else {
+            output.id = Math.floor(Math.random() * 99999).toString(36);
+            dataRoot[dataField] = dataRoot[dataField] || [];
+            dataRoot[dataField].push(output);
+          }
+          if(saveFn) saveFn(dataRoot);
+          if(redirect) app.goto(redirect);
+        } catch(e) {console.log(e);}
+        return false;
+      };
+      return {item}
+    };
+  };
+  app.validator = {init, validate, SimpleFormCtrl};
 };
 (typeof(module)!=='undefined') && (module.exports = MinifrdgFormValidator) || (window.MinifrdgFormValidator = MinifrdgFormValidator)
