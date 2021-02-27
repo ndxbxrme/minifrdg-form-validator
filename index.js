@@ -15,7 +15,7 @@ const MinifrdgFormValidator = (app, validators) => {
       if(elem.name) {
         let localTruth = true;
         output[elem.name] = elem.value;
-        if(elem.type==='number') output[elem.value] = +elem.value;
+        if(elem.type==='number') output[elem.name] = +elem.value;
         elem.getAttributeNames().forEach(name => {
           if(validators[name]) {
             elem.className = elem.className.replace(/\s*invalid|\s*valid/g, '');
